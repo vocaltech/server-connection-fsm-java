@@ -1,4 +1,4 @@
-package fr.vocaltech.fsm.server;
+package fr.vocaltech.fsm.server.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.restart.RestartEndpoint;
