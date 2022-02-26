@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class BasicControllerTest {
     @LocalServerPort
-    int port;
+    private int port;
 
 	@Autowired
 	private TestRestTemplate restTemplate;
