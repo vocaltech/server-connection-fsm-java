@@ -1,7 +1,7 @@
 package fr.vocaltech.fsm;
 
 public class ServerConnectionFsm {
-    enum State {
+    public enum State {
         Init {
             @Override
             public State next(boolean isReachable) {
