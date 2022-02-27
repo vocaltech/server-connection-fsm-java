@@ -2,11 +2,11 @@
 
 ### Description
 
-Check if a server is reachable or not, using a Finite State Machine (FSM).<br>
-There are three states (see diagram below):
-- NotReachable
-- Reachable
-- Recovery
+Check if a server is reachable or not, using a Finite State Machine (FSM) to update the different states.<br>
+This FSM has 3 states (see diagram below):
+- NotReachable: the server is not reachable
+- Reachable: the server is reachable
+- Recovery: the server was in NotReachable state, and the server is reachable
 
 ![img.png](docs/server_connection_uml.png)
 
