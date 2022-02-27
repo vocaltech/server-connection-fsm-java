@@ -26,3 +26,11 @@ assertEquals(state.next(true), CheckServerConnectionFsm.State.Reachable);
 // and we go to the next state (NotReachable)
 assertEquals(state.next(false), CheckServerConnectionFsm.State.NotReachable);`
 ```
+
+### Exposed endpoints
+#### Default route
+> `http://localhost:8080`
+#### Shutdown server
+> `http://localhost:8080/`
+#### Check if server is available
+> `http://localhost:8080/available`
