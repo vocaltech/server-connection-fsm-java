@@ -1,16 +1,14 @@
 @startuml
 'https://plantuml.com/state-diagram
 
-scale 350 width
+scale 250 width
 hide empty description
 
 [*] --> Reachable : true
 [*] --> NotReachable : false
 
 Reachable --> NotReachable : false
-Reachable --> Reachable : true
 NotReachable --> Recovery : true
-NotReachable --> NotReachable : false
 Recovery --> Reachable : true
 Recovery --> NotReachable : false
 
