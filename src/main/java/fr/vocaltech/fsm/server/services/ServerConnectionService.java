@@ -38,6 +38,11 @@ public class ServerConnectionService {
         return false;
     }
 
+    public void shutdown() {
+        //String url =
+    }
+
+    // TODO: checkHealth()
     public String checkHealth() {
         String url_server_health = env.getProperty("url.server.health");
 
