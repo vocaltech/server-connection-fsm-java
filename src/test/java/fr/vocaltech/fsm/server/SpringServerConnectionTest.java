@@ -1,8 +1,7 @@
 package fr.vocaltech.fsm.server;
 
-import fr.vocaltech.fsm.ServerConnectionFsm;
-
 import okhttp3.*;
+import java.io.IOException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,10 +9,12 @@ import org.junit.jupiter.api.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.awaitility.Awaitility.await;
-
-import java.io.IOException;
-
 import java.util.concurrent.TimeUnit;
+
+import org.springframework.test.context.TestPropertySource;
+
+import fr.vocaltech.fsm.ServerConnectionFsm;
+
 
 /**
  * -----------------------------------------------------
@@ -21,9 +22,12 @@ import java.util.concurrent.TimeUnit;
  * -----------------------------------------------------
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestPropertySource("/application-test.properties")
 public class SpringServerConnectionTest {
+    // TODO: replace with application-test.properties
     private final static String URL_AVAILABLE = "http://localhost:8080/available";
     private final static String URL_SHUTDOWN = "http://localhost:8080/actuator/shutdown";
+    private final static String URL_HEALTH = "http://localhost:8080/health";
 
     private static ServerConnectionFsm.State currentState;
 
@@ -139,6 +143,27 @@ public class SpringServerConnectionTest {
 
         } catch (IOException ioe) {
             ioe.printStackTrace();
+        }
+    }
+
+    @Test
+    @Order(5)
+    public void testHealth() {
+        try {
+            OkHttpClient client = new OkHttpClient();
+            Request req = new Request.Builder()
+                    .url(URL_HEALTH)
+                    .build();
+
+            Response res = client.newCall(req).execute();
+
+            String body = res.body().string();
+            JSONObject json = new JSONObject(body);
+            String status = json.getString("status");
+            assertThat(status).isEqualTo("UP");
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
         }
     }
 }
