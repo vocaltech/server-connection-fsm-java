@@ -29,4 +29,9 @@ public class ServerController {
     public boolean checkServerConnection() {
         return serverConnectionService.isServerAvailable();
     }
+
+    @GetMapping("/health")
+    public String health() {
+        return serverConnectionService.checkHealth();
+    }
 }
