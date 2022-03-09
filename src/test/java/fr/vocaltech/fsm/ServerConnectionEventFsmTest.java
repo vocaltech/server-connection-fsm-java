@@ -51,4 +51,12 @@ class ServerConnectionEventFsmTest {
 
         assertEquals(States.STATE_NOT_REACHABLE, currentState);
     }
+
+    @Test
+    void test_State_Not_Reachable_to_State_Recovery() {
+        States currentState = States.STATE_NOT_REACHABLE;
+        currentState = currentState.sendEvent(Events.EVENT_SERVER_REACHABLE);
+
+        assertEquals(States.STATE_RECOVERY, currentState);
+    }
 }
