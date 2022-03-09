@@ -45,3 +45,6 @@ assertEquals(state.next(true), ServerConnectionFsm.State.Recovery);`
 > `http://localhost:8080/actuator/shutdown`
 #### Check if server is available
 > `http://localhost:8080/available`
+
+### FSM with events
+![img.png](docs/server-connection-event-fsm.png)
