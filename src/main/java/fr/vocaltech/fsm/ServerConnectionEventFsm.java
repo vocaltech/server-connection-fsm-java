@@ -28,6 +28,8 @@ public class ServerConnectionEventFsm {
         STATE_REACHABLE {
             @Override
             public States sendEvent(Events e) {
+                if (e == Events.EVENT_SERVER_NOT_REACHABLE && _isStarted)
+                    return STATE_NOT_REACHABLE;
                 return null;
             }
         },
