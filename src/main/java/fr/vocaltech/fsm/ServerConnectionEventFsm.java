@@ -44,6 +44,13 @@ public class ServerConnectionEventFsm {
         STATE_RECOVERY {
             @Override
             public States sendEvent(Events e) {
+                switch (e) {
+                    case EVENT_SERVER_REACHABLE:
+                        return _isStarted ? STATE_REACHABLE : null;
+
+                    case EVENT_SERVER_NOT_REACHABLE:
+                        return _isStarted ? STATE_NOT_REACHABLE: null;
+                }
                 return null;
             }
         };
