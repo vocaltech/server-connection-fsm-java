@@ -48,3 +48,42 @@ assertEquals(state.next(true), ServerConnectionFsm.State.Recovery);`
 
 ### FSM with events
 ![img.png](docs/server-connection-event-fsm.png)
+
+### Usage
+
+```
+//
+// create the fsm
+//
+ServerConnectionEventFsm serverConnectionEventFsm = new ServerConnectionEventFsm();
+
+//
+// start the fsm
+//
+serverConnectionEventFsm.start();
+
+//
+// send EVENT_SERVER_REACHABLE
+// from STATE_INIT to STATE_REACHABLE
+//
+States currentState = States.STATE_INIT;
+currentState = currentState.sendEvent(Events.EVENT_SERVER_REACHABLE);
+assertEquals(States.STATE_REACHABLE, currentState);
+
+//
+// test STATE_RECOVERY
+//
+States currentState = States.STATE_RECOVERY;
+currentState = currentState.sendEvent(Events.EVENT_SERVER_REACHABLE);
+assertEquals(States.STATE_REACHABLE, currentState);
+
+currentState = States.STATE_RECOVERY;
+currentState = currentState.sendEvent(Events.EVENT_SERVER_NOT_REACHABLE);
+assertEquals(States.STATE_NOT_REACHABLE, currentState);
+       
+//
+// stop the fsm
+//
+serverConnectionEventFsm.stop()
+        
+```
